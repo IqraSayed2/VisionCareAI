@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Authentication{% endblock %}
+
+{% block content %}
+
+<div class="authbody">
+<div class="auth-container">
+
+  <!-- LEFT SIDE -->
+  <div class="auth-branding">
+    <div class="auth-brand-content">
+      <div class="auth-logo">
+        <i class="bi bi-eye-fill"></i>
+        <span>VisionCare AI</span>
+      </div>
+
+      <h1 class="auth-brand-title">
+        Advanced Eye Health Analysis at Your Fingertips
+      </h1>
+
+      <p class="auth-brand-description">
+        Join thousands of users protecting their vision with AI-powered
+        early detection technology.
+      </p>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="auth-forms">
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+      <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} mb-3">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- LOGIN FORM -->
+    <div class="auth-form-container active" id="loginForm">
+      <h2 class="auth-form-title">Welcome Back</h2>
+
+      <form method="POST">
+        <input type="hidden" name="action" value="login">
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <i class="bi bi-envelope auth-input-icon"></i>
+            <input type="email" name="email" class="auth-input" placeholder="Email" required>
+          </div>
+        </div>
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <i class="bi bi-lock auth-input-icon"></i>
+            <input type="password" name="password" class="auth-input" placeholder="Password" required>
+          </div>
+        </div>
+
+        <button class="auth-submit-btn">Login</button>
+      </form>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div class="auth-form-container" id="signupForm">
+      <h2 class="auth-form-title">Create Account</h2>
+
+      <form method="POST">
+        <input type="hidden" name="action" value="signup">
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <i class="bi bi-person auth-input-icon"></i>
+            <input type="text" name="username" class="auth-input" placeholder="Username" required>
+          </div>
+        </div>
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <i class="bi bi-envelope auth-input-icon"></i>
+            <input type="email" name="email" class="auth-input" placeholder="Email" required>
+          </div>
+        </div>
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <i class="bi bi-lock auth-input-icon"></i>
+            <input type="password" name="password" class="auth-input" placeholder="Password" required>
+          </div>
+        </div>
+
+        <div class="auth-form-group">
+          <div class="auth-input-wrapper">
+            <i class="bi bi-lock-fill auth-input-icon"></i>
+            <input type="password" name="confirm" class="auth-input" placeholder="Confirm Password" required>
+          </div>
+        </div>
+
+        <button class="auth-submit-btn">Create Account</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<script>
+  function switchTab(tab) {
+    document.querySelectorAll(".auth-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".auth-form-container").forEach(f => f.classList.remove("active"));
+
+    if (tab === "login") {
+      document.querySelectorAll(".auth-tab")[0].classList.add("active");
+      document.getElementById("loginForm").classList.add("active");
+    } else {
+      document.querySelectorAll(".auth-tab")[1].classList.add("active");
+      document.getElementById("signupForm").classList.add("active");
+    }
+  }
+</script>
+
+{% endblock %}

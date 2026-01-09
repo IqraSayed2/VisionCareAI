@@ -1,0 +1,147 @@
+{% extends "base.html" %} 
+{% block title %}Analysis Result{% endblock %} 
+{% block content %}
+
+<div class="container">
+  <!-- Header -->
+  <div class="result-header">
+    <div class="result-badge">
+      <i class="bi bi-cpu"></i>
+      AI Powered Analysis
+    </div>
+
+    <div class="result-steps">
+      <div class="result-step">
+        <span class="result-step-number">✓</span>
+        <span>Upload</span>
+      </div>
+      <i class="bi bi-chevron-right" style="color: #d1d5db"></i>
+      <div class="result-step">
+        <span class="result-step-number">✓</span>
+        <span>Analysis</span>
+      </div>
+      <i class="bi bi-chevron-right" style="color: #d1d5db"></i>
+      <div class="result-step active">
+        <span class="result-step-number">3</span>
+        <span>Results</span>
+      </div>
+    </div>
+
+    <p class="result-description">
+      Upload a fundus camera image to detect signs of Diabetic Retinopathy and
+      other ocular conditions.
+    </p>
+  </div>
+
+  <div class="result-grid">
+    <!-- LEFT COLUMN -->
+    <div>
+      <div class="result-image-section">
+        <div class="result-image-container">
+          <img
+            src="{{ url_for('static', filename=image_path) }}"
+            class="result-image"
+            alt="Uploaded Eye Scan"
+          />
+          <div class="result-image-overlay">
+            <div class="result-image-quality">Image Quality: Good</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-confidence-section">
+        <h3 class="result-confidence-title">Detection Confidence</h3>
+
+        {% for disease, score in diseases.items() %}
+        <div class="result-confidence-item">
+          <div class="result-confidence-header">
+            <span class="result-confidence-name">{{ disease }}</span>
+            <span class="result-confidence-percentage">{{ score }}%</span>
+          </div>
+          <div class="result-confidence-bar">
+            <div
+              class="result-confidence-fill"
+              style="width: {{ score }}%"
+            ></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div>
+      <div class="result-diagnosis-card">
+        <div class="result-diagnosis-header">
+          <div class="result-diagnosis-left">
+            <div class="result-diagnosis-icon">
+              <i class="bi bi-exclamation"></i>
+            </div>
+            <span class="result-diagnosis-type">Primary Diagnosis</span>
+          </div>
+          <div class="result-diagnosis-badge">Detection Positive</div>
+        </div>
+
+        <h2 class="result-diagnosis-title">Diabetic Retinopathy</h2>
+
+        <p class="result-diagnosis-description">
+          Detected patterns consistent with moderate stage Diabetic Retinopathy.
+          Several microaneurysms and hemorrhages were detected in the macular
+          region.
+        </p>
+
+        <div class="result-severity-grid">
+          <div class="result-severity-item">
+            <span class="result-severity-label">Severity:</span>
+            <span class="result-severity-value critical">Moderate</span>
+          </div>
+          <div class="result-severity-item">
+            <span class="result-severity-label">Recommendation:</span>
+            <span class="result-severity-value">Refer to Ophthalmologist</span>
+          </div>
+          <div class="result-severity-item">
+            <span class="result-severity-label">Urgency:</span>
+            <span class="result-severity-value critical">High</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Steps -->
+      <div class="result-next-steps">
+        <h3 class="result-next-steps-title">Next Steps</h3>
+
+        <div class="result-step-item">
+          <div class="result-step-num">1</div>
+          <div class="result-step-text">
+            Download the full diagnostic report (PDF) for your records.
+          </div>
+        </div>
+
+        <div class="result-step-item">
+          <div class="result-step-num">2</div>
+          <div class="result-step-text">
+            Schedule a follow-up appointment with a specialist for confirmation.
+          </div>
+        </div>
+
+        <div class="result-step-item">
+          <div class="result-step-num">3</div>
+          <div class="result-step-text">
+            Monitor blood sugar levels and blood pressure daily.
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="result-actions">
+        <button class="result-btn-secondary">Analyze Another</button>
+        <button class="result-btn-primary">
+          <i class="bi bi-download"></i>
+          Export Report
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

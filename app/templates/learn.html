@@ -1,0 +1,723 @@
+{% extends "base.html" %} 
+{% block title %}Learn{% endblock %} 
+{% block content %}
+
+<div class="container mt-4">
+  <!-- Hero Section -->
+  <div class="learn-hero">
+    <div class="learn-hero-content">
+      <h1 class="learn-hero-title">Eye Health Library</h1>
+      <p class="learn-hero-description">
+        Explore our comprehensive guide to understanding various eye conditions,
+        symptoms, and the latest treatments backed by medical research.
+      </p>
+
+      <div class="learn-search-box">
+        <i class="bi bi-search learn-search-icon"></i>
+        <input
+          type="text"
+          class="learn-search-input"
+          id="searchInput"
+          placeholder="Search for symptoms or diseases (e.g., Glaucoma)..."
+        />
+        <button class="learn-search-btn" onclick="performSearch()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Results Section -->
+  <div class="learn-search-results" id="searchResults">
+    <div class="learn-results-header">
+      <div>
+        <span class="learn-results-title">
+          Search Results for "<span id="searchQuery"></span>"
+        </span>
+        <span class="learn-results-count" id="resultsCount"></span>
+      </div>
+      <a href="#" class="learn-clear-search" onclick="clearSearch()">
+        Clear Search <i class="bi bi-x"></i>
+      </a>
+    </div>
+
+    <div class="row" id="resultsContainer"></div>
+  </div>
+
+  <!-- What Are Eye Diseases -->
+  <div class="learn-info">
+    <h2 class="learn-info-title">What Are Eye Diseases?</h2>
+    <p class="learn-info-text">
+      Eye diseases encompass a wide range of clinical conditions that affect the
+      structure and function of the eye, potentially impairing vision. These
+      conditions can range from minor irritations like dry eye to severe
+      diseases such as glaucoma and macular degeneration, which can lead to
+      permanent blindness if left untreated. Understanding the nature of these
+      diseases is the first critical step toward maintaining lifelong ocular
+      health.
+    </p>
+  </div>
+
+  <!-- Early Detection -->
+  <div class="learn-early-detection">
+    <h2 class="learn-section-title">Why Early Detection Matters</h2>
+
+    <div class="learn-detection-grid">
+      <div class="learn-detection-card">
+        <div class="learn-detection-icon learn-detection-icon-blue">
+          <i class="bi bi-eye-fill"></i>
+        </div>
+        <h3 class="learn-detection-title">Prevent Vision Loss</h3>
+        <p class="learn-detection-text">
+          Many serious eye diseases, often called "silent thieves of sight,"
+          show no early symptoms. Detecting them before symptoms appear is often
+          the only way to halt progression and save your vision.
+        </p>
+      </div>
+
+      <div class="learn-detection-card">
+        <div class="learn-detection-icon learn-detection-icon-green">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h3 class="learn-detection-title">Effective Treatment</h3>
+        <p class="learn-detection-text">
+          Treatment options are significantly more effective and less invasive
+          when conditions are diagnosed in their initial stages, often
+          preserving a higher quality of life.
+        </p>
+      </div>
+
+      <div class="learn-detection-card">
+        <div class="learn-detection-icon learn-detection-icon-purple">
+          <i class="bi bi-heart-pulse"></i>
+        </div>
+        <h3 class="learn-detection-title">Overall Health Insight</h3>
+        <p class="learn-detection-text">
+          The eye provides a unique window into your overall health. Exams can
+          sometimes reveal systemic issues such as diabetes, hypertension, and
+          high cholesterol.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diseases Section -->
+  <div class="learn-diseases">
+    <h2 class="learn-section-title">
+      Comprehensive Information on Eye Diseases
+    </h2>
+
+    <div class="learn-disease-item" onclick="toggleDisease('glaucoma')">
+      <div class="learn-disease-left">
+        <div class="learn-disease-icon learn-disease-icon-blue">
+          <i class="bi bi-eye-slash"></i>
+        </div>
+        <div class="learn-disease-name">Glaucoma</div>
+      </div>
+      <i
+        class="bi bi-chevron-down learn-disease-chevron"
+        id="chevron-glaucoma"
+      ></i>
+    </div>
+    <div
+      class="learn-disease-content"
+      id="content-glaucoma"
+      style="display: none"
+    >
+      <div class="learn-disease-details">
+        <h4>What is Glaucoma?</h4>
+        <p>
+          Glaucoma is a group of eye conditions that damage the optic nerve,
+          often due to abnormally high pressure in the eye. It's one of the
+          leading causes of blindness for people over 60.
+        </p>
+        <h5>Symptoms:</h5>
+        <ul>
+          <li>Gradual loss of peripheral vision</li>
+          <li>Blurred vision</li>
+          <li>Halos around lights</li>
+          <li>Eye pain or redness</li>
+        </ul>
+        <h5>Risk Factors:</h5>
+        <ul>
+          <li>Age over 60</li>
+          <li>Family history</li>
+          <li>High eye pressure</li>
+          <li>Thin corneas</li>
+          <li>Certain medical conditions</li>
+        </ul>
+        <h5>Treatment:</h5>
+        <p>
+          Early detection is crucial. Treatments include eye drops, oral
+          medications, laser therapy, or surgery to lower intraocular pressure.
+        </p>
+      </div>
+    </div>
+
+    <div class="learn-disease-item" onclick="toggleDisease('cataracts')">
+      <div class="learn-disease-left">
+        <div class="learn-disease-icon learn-disease-icon-blue">
+          <i class="bi bi-grid-3x3"></i>
+        </div>
+        <div class="learn-disease-name">Cataracts</div>
+      </div>
+      <i
+        class="bi bi-chevron-down learn-disease-chevron"
+        id="chevron-cataracts"
+      ></i>
+    </div>
+    <div
+      class="learn-disease-content"
+      id="content-cataracts"
+      style="display: none"
+    >
+      <div class="learn-disease-details">
+        <h4>What are Cataracts?</h4>
+        <p>
+          Cataracts occur when the lens of the eye becomes cloudy, causing
+          blurred vision. They are the leading cause of blindness worldwide and
+          are most common in older adults.
+        </p>
+        <h5>Symptoms:</h5>
+        <ul>
+          <li>Cloudy or blurry vision</li>
+          <li>Colors seem faded</li>
+          <li>Glare from headlights or lamps</li>
+          <li>Poor night vision</li>
+          <li>Double vision in one eye</li>
+        </ul>
+        <h5>Risk Factors:</h5>
+        <ul>
+          <li>Age</li>
+          <li>Diabetes</li>
+          <li>Smoking</li>
+          <li>Excessive sun exposure</li>
+          <li>Steroid use</li>
+        </ul>
+        <h5>Treatment:</h5>
+        <p>
+          Surgery is the only effective treatment. During cataract surgery, the
+          cloudy lens is removed and replaced with an artificial lens implant.
+        </p>
+      </div>
+    </div>
+
+    <div class="learn-disease-item" onclick="toggleDisease('retinopathy')">
+      <div class="learn-disease-left">
+        <div class="learn-disease-icon learn-disease-icon-blue">
+          <i class="bi bi-droplet"></i>
+        </div>
+        <div class="learn-disease-name">Diabetic Retinopathy</div>
+      </div>
+      <i
+        class="bi bi-chevron-down learn-disease-chevron"
+        id="chevron-retinopathy"
+      ></i>
+    </div>
+    <div
+      class="learn-disease-content"
+      id="content-retinopathy"
+      style="display: none"
+    >
+      <div class="learn-disease-details">
+        <h4>What is Diabetic Retinopathy?</h4>
+        <p>
+          Diabetic retinopathy is a diabetes complication that affects the eyes.
+          It's caused by damage to the blood vessels of the light-sensitive
+          tissue at the back of the eye (retina).
+        </p>
+        <h5>Symptoms:</h5>
+        <ul>
+          <li>Blurred vision</li>
+          <li>Floaters</li>
+          <li>Dark areas in vision</li>
+          <li>Vision loss</li>
+        </ul>
+        <h5>Risk Factors:</h5>
+        <ul>
+          <li>Duration of diabetes</li>
+          <li>Poor blood sugar control</li>
+          <li>High blood pressure</li>
+          <li>High cholesterol</li>
+          <li>Pregnancy</li>
+        </ul>
+        <h5>Treatment:</h5>
+        <p>
+          Management includes controlling blood sugar, blood pressure, and
+          cholesterol. Advanced cases may require laser treatment, injections,
+          or surgery.
+        </p>
+      </div>
+    </div>
+
+    <div class="learn-disease-item" onclick="toggleDisease('degeneration')">
+      <div class="learn-disease-left">
+        <div class="learn-disease-icon learn-disease-icon-blue">
+          <i class="bi bi-circle"></i>
+        </div>
+        <div class="learn-disease-name">Macular Degeneration</div>
+      </div>
+      <i
+        class="bi bi-chevron-down learn-disease-chevron"
+        id="chevron-degeneration"
+      ></i>
+    </div>
+    <div
+      class="learn-disease-content"
+      id="content-degeneration"
+      style="display: none"
+    >
+      <div class="learn-disease-details">
+        <h4>What is Macular Degeneration?</h4>
+        <p>
+          Age-related macular degeneration (AMD) is a leading cause of vision
+          loss in people over 50. It affects the macula, the part of the eye
+          responsible for central vision.
+        </p>
+        <h5>Symptoms:</h5>
+        <ul>
+          <li>Blurred or fuzzy vision</li>
+          <li>Straight lines appear wavy</li>
+          <li>Dark areas in central vision</li>
+          <li>Objects appear smaller than they are</li>
+        </ul>
+        <h5>Risk Factors:</h5>
+        <ul>
+          <li>Age over 50</li>
+          <li>Family history</li>
+          <li>Smoking</li>
+          <li>Obesity</li>
+          <li>High blood pressure</li>
+        </ul>
+        <h5>Treatment:</h5>
+        <p>
+          Early AMD has no treatment, but lifestyle changes can help. Advanced
+          AMD may be treated with injections, laser therapy, or photodynamic
+          therapy.
+        </p>
+      </div>
+    </div>
+
+    <div class="learn-disease-item" onclick="toggleDisease('dryeye')">
+      <div class="learn-disease-left">
+        <div class="learn-disease-icon learn-disease-icon-blue">
+          <i class="bi bi-droplet-half"></i>
+        </div>
+        <div class="learn-disease-name">Dry Eye Syndrome</div>
+      </div>
+      <i
+        class="bi bi-chevron-down learn-disease-chevron"
+        id="chevron-dryeye"
+      ></i>
+    </div>
+    <div
+      class="learn-disease-content"
+      id="content-dryeye"
+      style="display: none"
+    >
+      <div class="learn-disease-details">
+        <h4>What is Dry Eye Syndrome?</h4>
+        <p>
+          Dry eye syndrome occurs when your eyes don't produce enough tears or
+          the tears evaporate too quickly. This leads to discomfort and can
+          damage the eye's surface.
+        </p>
+        <h5>Symptoms:</h5>
+        <ul>
+          <li>Dryness</li>
+          <li>Irritation</li>
+          <li>Redness</li>
+          <li>Blurred vision</li>
+          <li>Sensitivity to light</li>
+        </ul>
+        <h5>Risk Factors:</h5>
+        <ul>
+          <li>Age</li>
+          <li>Computer use</li>
+          <li>Contact lens wear</li>
+          <li>Certain medications</li>
+          <li>Environmental factors</li>
+        </ul>
+        <h5>Treatment:</h5>
+        <p>
+          Treatment includes artificial tears, prescription eye drops, warm
+          compresses, and lifestyle changes. In severe cases, procedures may be
+          needed.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Section -->
+  <div class="learn-ai-section">
+    <div class="learn-ai-header">
+      <div class="learn-ai-badge">
+        <i class="bi bi-cpu"></i>
+        TECHNOLOGY
+      </div>
+      <h2 class="learn-ai-title">How AI Helps Doctors</h2>
+      <p class="learn-ai-text">
+        Artificial Intelligence acts as a powerful "second opinion" for
+        ophthalmologists. By analyzing thousands of retinal images in seconds,
+        our AI algorithms can identify subtle patterns and anomalies - such as
+        microaneurysms or minute changes in optic nerve structure - that the human
+        eye might miss during a standard screening.
+      </p>
+    </div>
+
+    <div class="learn-ai-grid">
+      <div class="learn-ai-features-card">
+        <ul class="learn-ai-features">
+          <li class="learn-ai-feature">
+            <div class="learn-ai-feature-icon"><i class="bi bi-check"></i></div>
+            <div>
+              <div class="learn-ai-feature-title">Rapid Triage</div>
+              <div class="learn-ai-feature-text">
+                Analyzing fundus images quickly to prioritize urgent cases.
+              </div>
+            </div>
+          </li>
+          <li class="learn-ai-feature">
+            <div class="learn-ai-feature-icon">
+              <i class="bi bi-check"></i>
+            </div>
+            <div>
+              <div class="learn-ai-feature-title">Enhanced Precision:</div>
+              <div class="learn-ai-feature-text">
+                High sensitivity to early-stage symptoms undetectable by
+                standard exams.
+              </div>
+            </div>
+          </li>
+          <li class="learn-ai-feature">
+            <div class="learn-ai-feature-icon">
+              <i class="bi bi-check"></i>
+            </div>
+            <div>
+              <div class="learn-ai-feature-title">Continuous Learning:</div>
+              <div class="learn-ai-feature-text">
+                The system improves its accuracy with every diagnosis it
+                assists.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="learn-ai-visual">
+        <div class="learn-ai-visual-icons">
+          <div class="learn-ai-visual-icon"><i class="bi bi-image"></i></div>
+          <div class="learn-ai-visual-icon">
+            <i class="bi bi-three-dots"></i>
+          </div>
+          <div class="learn-ai-visual-icon">
+            <i class="bi bi-bar-chart"></i>
+          </div>
+        </div>
+        <h3 class="learn-ai-visual-title">Automated Analysis</h3>
+        <p class="learn-ai-visual-subtitle">Processing retinal scan data</p>
+      </div>
+    </div>
+
+    <div class="learn-limitations">
+      <div class="learn-limitations-header">
+        <i class="bi bi-exclamation-triangle learn-limitations-icon"></i>
+        <h3 class="learn-limitations-title">Limitations of the System</h3>
+      </div>
+      <p class="learn-limitations-text">
+        While our AI model achieves high accuracy rates in controlled tests, it
+        is <strong>not a replacement</strong> for a comprehensive eye
+        examination by a qualified professional. The system may have reduced
+        accuracy when analyzing poor-quality images, images with obstructions
+        (like cataracts), or rare conditions that were not present in the
+        training dataset. Always consult an ophthalmologist for a definitive
+        diagnosis and treatment plan.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Search database
+  const searchDatabase = [
+    {
+      title: "Understanding Red Eyes",
+      description:
+        "Red eye is a general term used to describe red, irritated, and bloodshot eyes. Learn about the most common causes ranging from fatigue to infections.",
+      icon: "bi-eye",
+      iconColor: "red",
+      link: "https://www.google.com/search?q=red+eyes+causes+symptoms+treatment",
+    },
+    {
+      title: "Dry Eye Syndrome",
+      description:
+        "One of the most frequent causes of redness. When your eyes don't produce enough tears, the surface becomes irritated and inflamed.",
+      icon: "bi-droplet",
+      iconColor: "blue",
+      link: "https://www.google.com/search?q=dry+eye+syndrome+symptoms+treatment",
+    },
+    {
+      title: "Conjunctivitis (Pink Eye)",
+      description:
+        "Infection or inflammation of the conjunctiva. Often viral or bacterial, it is highly contagious and characterized by intense redness.",
+      icon: "bi-sun",
+      iconColor: "yellow",
+      link: "https://www.google.com/search?q=conjunctivitis+pink+eye+symptoms+treatment",
+    },
+    {
+      title: "Glaucoma",
+      description:
+        "Often called the 'silent thief of sight', glaucoma can cause redness along with pressure buildup in the eye, requiring immediate attention.",
+      icon: "bi-eye-slash",
+      iconColor: "blue",
+      link: "https://www.google.com/search?q=glaucoma+symptoms+treatment+causes",
+    },
+    {
+      title: "Eye Allergies",
+      description:
+        "Allergic reactions to pollen, dust, or pet dander can cause red, itchy, and watery eyes. Usually seasonal or environmental.",
+      icon: "bi-flower1",
+      iconColor: "yellow",
+      link: "https://www.google.com/search?q=eye+allergies+symptoms+treatment+relief",
+    },
+    {
+      title: "Cataracts",
+      description:
+        "Clouding of the eye's natural lens that affects vision. Most common in older adults and can be surgically treated with lens replacement.",
+      icon: "bi-circle-half",
+      iconColor: "gray",
+      link: "https://www.google.com/search?q=cataracts+symptoms+surgery+treatment",
+    },
+    {
+      title: "Macular Degeneration",
+      description:
+        "Age-related condition affecting central vision. Can lead to loss of sharp vision needed for reading and recognizing faces.",
+      icon: "bi-bullseye",
+      iconColor: "purple",
+      link: "https://www.google.com/search?q=macular+degeneration+symptoms+treatment+prevention",
+    },
+    {
+      title: "Diabetic Retinopathy",
+      description:
+        "Diabetes complication that affects blood vessels in the retina. Can cause vision loss if not properly managed.",
+      icon: "bi-droplet-fill",
+      iconColor: "red",
+      link: "https://www.google.com/search?q=diabetic+retinopathy+symptoms+treatment+management",
+    },
+    {
+      title: "Retinal Detachment",
+      description:
+        "Medical emergency where the retina separates from the back of the eye. Requires immediate surgical intervention.",
+      icon: "bi-triangle",
+      iconColor: "orange",
+      link: "https://www.google.com/search?q=retinal+detachment+symptoms+surgery+treatment",
+    },
+    {
+      title: "Keratoconus",
+      description:
+        "Progressive eye disease where the cornea thins and bulges outward. Can significantly distort vision and may require corneal transplant.",
+      icon: "bi-pentagon",
+      iconColor: "green",
+      link: "https://www.google.com/search?q=keratoconus+symptoms+treatment+corneal+transplant",
+    },
+    {
+      title: "Uveitis",
+      description:
+        "Inflammation of the middle layer of the eye. Can cause pain, redness, and vision changes. May be associated with autoimmune diseases.",
+      icon: "bi-record-circle",
+      iconColor: "red",
+      link: "https://www.google.com/search?q=uveitis+symptoms+treatment+inflammation",
+    },
+    {
+      title: "Amblyopia (Lazy Eye)",
+      description:
+        "Reduced vision in one eye due to abnormal visual development. Often occurs in childhood and can be treated if caught early.",
+      icon: "bi-eye",
+      iconColor: "blue",
+      link: "https://www.google.com/search?q=amblyopia+lazy+eye+symptoms+treatment+children",
+    },
+    {
+      title: "Strabismus (Crossed Eyes)",
+      description:
+        "Misalignment of the eyes where they don't look in the same direction. Can cause double vision and affect depth perception.",
+      icon: "bi-arrows-angle-contract",
+      iconColor: "purple",
+      link: "https://www.google.com/search?q=strabismus+crossed+eyes+symptoms+treatment",
+    },
+    {
+      title: "Color Blindness",
+      description:
+        "Inability to distinguish certain colors. Most commonly affects red-green perception and is usually inherited.",
+      icon: "bi-palette",
+      iconColor: "rainbow",
+      link: "https://www.google.com/search?q=color+blindness+symptoms+causes+treatment",
+    },
+    {
+      title: "Night Blindness",
+      description:
+        "Difficulty seeing in low light conditions. Can be caused by vitamin A deficiency or inherited retinal dystrophies.",
+      icon: "bi-moon",
+      iconColor: "dark",
+      link: "https://www.google.com/search?q=night+blindness+symptoms+causes+treatment",
+    },
+    {
+      title: "Floaters and Flashes",
+      description:
+        "Common visual disturbances where you see spots or flashes of light. Usually harmless but can indicate retinal issues.",
+      icon: "bi-stars",
+      iconColor: "white",
+      link: "https://www.google.com/search?q=floaters+flashes+eye+symptoms+causes",
+    },
+    {
+      title: "Blepharitis",
+      description:
+        "Inflammation of the eyelids causing redness, itching, and crusting. Often chronic and requires ongoing eyelid hygiene.",
+      icon: "bi-eyeglasses",
+      iconColor: "brown",
+      link: "https://www.google.com/search?q=blepharitis+eyelid+inflammation+symptoms+treatment",
+    },
+    {
+      title: "Pinguecula",
+      description:
+        "Yellowish patch on the sclera near the cornea. Often caused by UV exposure, dust, and wind. Usually harmless but can become inflamed.",
+      icon: "bi-patch-exclamation",
+      iconColor: "yellow",
+      link: "https://www.google.com/search?q=pinguecula+eye+condition+symptoms+treatment",
+    },
+    {
+      title: "Pterygium",
+      description:
+        "Fleshy growth on the conjunctiva that can extend onto the cornea. Caused by UV exposure and can affect vision if it grows over the pupil.",
+      icon: "bi-triangle-fill",
+      iconColor: "pink",
+      link: "https://www.google.com/search?q=pterygium+eye+growth+symptoms+treatment",
+    },
+    {
+      title: "Stye (Hordeolum)",
+      description:
+        "Painful bump on the eyelid caused by bacterial infection of an oil gland. Usually resolves on its own with warm compresses.",
+      icon: "bi-circle-fill",
+      iconColor: "red",
+      link: "https://www.google.com/search?q=stye+hordeolum+eyelid+bump+symptoms+treatment",
+    },
+  ];
+
+  function performSearch() {
+    const searchInput = document.getElementById("searchInput");
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (!query) return;
+
+    // Filter results based on query
+    const results = searchDatabase.filter(
+      (item) =>
+        item.title.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+    );
+
+    displayResults(query, results);
+  }
+
+  function displayResults(query, results) {
+    const searchResults = document.getElementById("searchResults");
+    const searchQuery = document.getElementById("searchQuery");
+    const resultsCount = document.getElementById("resultsCount");
+    const resultsContainer = document.getElementById("resultsContainer");
+
+    // Update query text
+    searchQuery.textContent = query;
+    resultsCount.textContent = `(${results.length} result${
+      results.length !== 1 ? "s" : ""
+    } found)`;
+
+    // Clear previous results
+    resultsContainer.innerHTML = "";
+
+    // Display results
+    if (results.length === 0) {
+      resultsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-search" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="mt-3" style="color: #999;">No results found for "${query}". Try searching for common eye conditions like "glaucoma", "cataract", or "red eye".</p>
+                    </div>
+                `;
+    } else {
+      results.forEach((result) => {
+        const iconColorClass =
+          result.iconColor === "red"
+            ? "learn-result-icon-red"
+            : result.iconColor === "blue"
+            ? "learn-result-icon-blue"
+            : "learn-result-icon-yellow";
+
+        const resultCard = `
+                        <div class="col-md-4 mb-4">
+                            <div class="learn-result-card">
+                                <div class="learn-result-icon ${iconColorClass}">
+                                    <i class="${result.icon}"></i>
+                                </div>
+                                <h3 class="learn-result-title">${result.title}</h3>
+                                <p class="learn-result-description">${result.description}</p>
+                                <a href="${result.link}" target="_blank" class="learn-result-link">
+                                    Learn More on Google
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+        resultsContainer.innerHTML += resultCard;
+      });
+    }
+
+    // Show results section
+    searchResults.classList.add("active");
+
+    // Scroll to results
+    searchResults.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function clearSearch() {
+    const searchResults = document.getElementById("searchResults");
+    const searchInput = document.getElementById("searchInput");
+
+    searchResults.classList.remove("active");
+    searchInput.value = "";
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Allow search on Enter key
+  document
+    .getElementById("searchInput")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        performSearch();
+      }
+    });
+
+  // Prevent default form submission if wrapped in form
+  document
+    .querySelector(".learn-search-box")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      performSearch();
+    });
+
+  function toggleDisease(disease) {
+    const content = document.getElementById("content-" + disease);
+    const chevron = document.getElementById("chevron-" + disease);
+
+    if (content.style.display === "none" || content.style.display === "") {
+      content.style.display = "block";
+      chevron.classList.remove("bi-chevron-down");
+      chevron.classList.add("bi-chevron-up");
+    } else {
+      content.style.display = "none";
+      chevron.classList.remove("bi-chevron-up");
+      chevron.classList.add("bi-chevron-down");
+    }
+  }
+</script>
+
+{% endblock %}

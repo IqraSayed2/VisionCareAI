@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="about-hero">
+  <div class="container">
+    <div class="about-hero-content">
+      <div class="about-hero-badge">About VisionCare AI</div>
+      <h1 class="about-hero-title">
+        Revolutionizing Eye Health Through AI Innovation
+      </h1>
+      <p class="about-hero-description">
+        We're on a mission to democratize access to eye health screening and
+        make early detection of vision-threatening diseases available to
+        everyone, everywhere.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Section -->
+<section class="about-mission">
+  <div class="container">
+    <div class="about-mission-grid">
+      <div class="about-mission-image">
+        <img
+          src="{{ url_for('static', filename='images/about-mission-image.png') }}"
+          alt="Eye Health Technology"
+        />
+      </div>
+
+      <div>
+        <div class="about-section-badge">Our Mission</div>
+        <h2 class="about-section-title">Vision for a Clearer Future</h2>
+
+        <p class="about-section-text">
+          VisionCare AI was founded with a singular purpose: to prevent
+          blindness through early detection. Millions of people worldwide
+          lose their sight to preventable diseases simply because they
+          didn't catch them early enough.
+        </p>
+
+        <p class="about-section-text">
+          We believe that advanced AI technology should not be limited to
+          specialized clinics in major cities. By making our platform
+          accessible to anyone with an internet connection, we're bridging
+          the gap between cutting-edge medical technology and those who need
+          it most.
+        </p>
+
+        <p class="about-section-text">
+          Our AI has been trained on millions of retinal images and
+          validated by board-certified ophthalmologists, achieving accuracy
+          rates that rival human experts.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technology Section -->
+<section class="about-technology">
+  <div class="container">
+    <div class="text-center">
+      <div class="about-section-badge">Advanced Technology</div>
+      <h2 class="about-section-title">AI-Powered Precision</h2>
+      <p class="about-section-text" style="max-width: 700px; margin: 0 auto">
+        Our deep learning models are trained on millions of retinal images
+        to detect subtle patterns that might escape the human eye.
+      </p>
+    </div>
+
+    <div class="about-tech-grid">
+      <div class="about-tech-visual">
+        <div class="about-tech-icons">
+          <div class="about-tech-icon-box"><i class="bi bi-cpu"></i></div>
+          <div class="about-tech-icon-box"><i class="bi bi-diagram-3"></i></div>
+          <div class="about-tech-icon-box"><i class="bi bi-graph-up-arrow"></i></div>
+        </div>
+        <div class="about-tech-label">Deep Learning Architecture</div>
+      </div>
+
+      <div>
+        <ul class="about-tech-features">
+          <li class="about-tech-feature">
+            <div class="about-tech-feature-icon"><i class="bi bi-check"></i></div>
+            <div>
+              <div class="about-tech-feature-title">Trained on 5M+ Images</div>
+              <div class="about-tech-feature-text">
+                Models trained on diverse retinal scans for robust detection.
+              </div>
+            </div>
+          </li>
+
+          <li class="about-tech-feature">
+            <div class="about-tech-feature-icon"><i class="bi bi-check"></i></div>
+            <div>
+              <div class="about-tech-feature-title">98% Accuracy Rate</div>
+              <div class="about-tech-feature-text">
+                Comparable to ophthalmologist-level diagnosis.
+              </div>
+            </div>
+          </li>
+
+          <li class="about-tech-feature">
+            <div class="about-tech-feature-icon"><i class="bi bi-check"></i></div>
+            <div>
+              <div class="about-tech-feature-title">Continuous Learning</div>
+              <div class="about-tech-feature-text">
+                Models improve with validated new data.
+              </div>
+            </div>
+          </li>
+
+          <li class="about-tech-feature">
+            <div class="about-tech-feature-icon"><i class="bi bi-check"></i></div>
+            <div>
+              <div class="about-tech-feature-title">HIPAA Compliant</div>
+              <div class="about-tech-feature-text">
+                Secure, encrypted, and privacy-focused architecture.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="about-faq">
+  <div class="container">
+    <h2 class="about-section-title text-center mb-5">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="about-faq-container">
+      <div class="accordion" id="faqAccordion">
+
+        {% set faqs = [
+          ("Does this replace a doctor's visit?",
+           "No. VisionCare AI is a screening tool and does not replace professional medical diagnosis."),
+          ("How accurate is the AI detection?",
+           "The system achieves over 95% accuracy depending on image quality."),
+          ("Is my medical data safe?",
+           "Yes. All data is encrypted and handled securely."),
+          ("What diseases can it detect?",
+           "Diabetic retinopathy, glaucoma, cataracts, AMD and more."),
+          ("How long does analysis take?",
+           "Typically under 5 seconds.")
+        ] %}
+
+        {% for q, a in faqs %}
+        <div class="about-accordion-item">
+          <button
+            class="about-accordion-button collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#faq{{ loop.index }}">
+            {{ q }}
+          </button>
+
+          <div id="faq{{ loop.index }}" class="accordion-collapse collapse">
+            <div class="about-accordion-body">{{ a }}</div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
