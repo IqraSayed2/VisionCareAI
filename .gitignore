@@ -1,7 +1,0 @@
-dataset/
-ml/visioncare_model.h5
-env/
-__pycache__/
-*.pyc
-.DS_Store
-*.log 
