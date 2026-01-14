@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block title %}History{% endblock %} {% block
-content %}
+{% extends "base.html" %} 
+{% block title %}History{% endblock %} 
+{% block content %}
 
 <div class="container" style="margin-top: 3rem;">
   <!-- Header -->
@@ -70,7 +71,6 @@ content %}
               />
               <div class="history-scan-info">
                 <h4>Retinal Scan #{{ d.id }}</h4>
-                <p>Fundus Image</p>
               </div>
             </div>
           </td>
@@ -97,14 +97,6 @@ content %}
 
           <td>
             <div class="history-actions">
-              <a
-                href="#"
-                class="history-action-btn"
-                title="View Results"
-                onclick="viewResult({{ d.id }})"
-              >
-                <i class="bi bi-eye"></i>
-              </a>
               <a
                 href="#"
                 class="history-action-btn"
@@ -147,11 +139,6 @@ content %}
 </div>
 
 <script>
-function viewResult(id) {
-  // Redirect to a result detail page or show modal
-  window.location.href = `/result/${id}`;
-}
-
 function exportResult(id) {
   // Trigger download of PDF report
   window.open(`/export/${id}`, '_blank');

@@ -43,9 +43,6 @@
             class="result-image"
             alt="Uploaded Eye Scan"
           />
-          <div class="result-image-overlay">
-            <div class="result-image-quality">Image Quality: Good</div>
-          </div>
         </div>
       </div>
 
@@ -79,29 +76,53 @@
             </div>
             <span class="result-diagnosis-type">Primary Diagnosis</span>
           </div>
-          <div class="result-diagnosis-badge">Detection Positive</div>
+          <div class="result-diagnosis-badge">{{ status }}</div>
         </div>
 
-        <h2 class="result-diagnosis-title">Diabetic Retinopathy</h2>
+        <h2 class="result-diagnosis-title">{{ primary_disease }}</h2>
 
+        {% if primary_disease == "Diabetic Retinopathy" %}
         <p class="result-diagnosis-description">
-          Detected patterns consistent with moderate stage Diabetic Retinopathy.
-          Several microaneurysms and hemorrhages were detected in the macular
-          region.
+          Detected patterns consistent with Diabetic Retinopathy. This condition affects the blood vessels in the retina and can lead to vision loss if untreated. Microaneurysms, hemorrhages, or exudates may be present, indicating damage from high blood sugar levels. Early detection is crucial for managing diabetes and preventing complications.
         </p>
+        {% elif primary_disease == "Glaucoma" %}
+        <p class="result-diagnosis-description">
+          Detected patterns consistent with Glaucoma. This eye condition damages the optic nerve, often due to high intraocular pressure. Possible optic disc changes or visual field defects may occur, leading to gradual vision loss if not addressed. Regular monitoring and treatment can help preserve vision.
+        </p>
+        {% elif primary_disease == "Cataract" %}
+        <p class="result-diagnosis-description">
+          Detected patterns consistent with Cataract. This involves clouding of the eye's natural lens, which can cause blurred vision and glare. Lens opacity or clouding may be present, affecting daily activities like reading or driving. Surgery is often effective in restoring clear vision.
+        </p>
+        {% else %}
+        <p class="result-diagnosis-description">
+          No significant abnormalities detected. The eye appears normal based on the analysis. However, regular eye exams are recommended to maintain good eye health and catch any potential issues early. Continue with healthy lifestyle habits to support overall vision wellness.
+        </p>
+        {% endif %}
 
         <div class="result-severity-grid">
           <div class="result-severity-item">
             <span class="result-severity-label">Severity:</span>
-            <span class="result-severity-value critical">Moderate</span>
+            {% if primary_disease == "Normal" %}
+            <span class="result-severity-value">None</span>
+            {% else %}
+            <span class="result-severity-value critical">Detected</span>
+            {% endif %}
           </div>
           <div class="result-severity-item">
             <span class="result-severity-label">Recommendation:</span>
+            {% if primary_disease == "Normal" %}
+            <span class="result-severity-value">Routine Check-up</span>
+            {% else %}
             <span class="result-severity-value">Refer to Ophthalmologist</span>
+            {% endif %}
           </div>
           <div class="result-severity-item">
             <span class="result-severity-label">Urgency:</span>
+            {% if primary_disease == "Normal" %}
+            <span class="result-severity-value">Low</span>
+            {% else %}
             <span class="result-severity-value critical">High</span>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -134,11 +155,11 @@
 
       <!-- Action Buttons -->
       <div class="result-actions">
-        <button class="result-btn-secondary">Analyze Another</button>
-        <button class="result-btn-primary">
+        <a href="{{ url_for('main.detect') }}" class="result-btn-secondary" style="text-decoration: none; display: flex; justify-content: center; align-items: center;">Analyze Another</a>
+        <a href="{{ url_for('main.export_report', detection_id=detection_id) }}" class="result-btn-primary" style="text-decoration: none;">
           <i class="bi bi-download"></i>
           Export Report
-        </button>
+        </a>
       </div>
     </div>
   </div>

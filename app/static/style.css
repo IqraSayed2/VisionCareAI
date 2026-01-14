@@ -2783,22 +2783,6 @@ body {
   object-fit: cover;
 }
 
-.result-image-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-  padding: 1.5rem;
-  color: white;
-}
-
-.result-image-quality {
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
 .result-image-field {
   font-size: 0.75rem;
   opacity: 0.9;

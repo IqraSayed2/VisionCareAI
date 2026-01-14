@@ -35,20 +35,22 @@
     </p>
   </div>
 
-  <form method="POST" enctype="multipart/form-data">
+  <form method="POST" enctype="multipart/form-data" onsubmit="return showLoading()">
     <div class="detect-grid">
       <!-- Upload Section -->
       <div class="detect-upload-section">
-        <div class="detect-upload-area" onclick="fileInput.click()">
-          <div class="detect-upload-icon">
+        <div class="detect-upload-area" onclick="fileInput.click()" id="uploadArea">
+          <div class="detect-upload-icon" id="uploadIcon">
             <i class="bi bi-cloud-upload"></i>
           </div>
 
-          <h3 class="detect-upload-title">Drag and drop your eye scan here</h3>
+          <h3 class="detect-upload-title" id="uploadTitle">Drag and drop your eye scan here</h3>
 
-          <p class="detect-upload-subtitle">
+          <p class="detect-upload-subtitle" id="uploadSubtitle">
             or click anywhere in the box to browse files
           </p>
+
+          <img id="imagePreview" src="" alt="Image Preview" style="display: none; max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px;">
 
           <input
             type="file"
@@ -57,12 +59,18 @@
             accept="image/*"
             hidden
             required
+            onchange="previewImage(event)"
           />
         </div>
 
-        <button type="submit" class="detect-btn-analyze mt-4">
+        <button type="submit" class="detect-btn-analyze mt-4" id="analyzeBtn">
           <i class="bi bi-play-circle"></i> Analyze Image
         </button>
+
+        <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+          <div class="spinner" style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+          <p>Analyzing your image... Please wait.</p>
+        </div>
 
         <div class="detect-file-info">
           <div class="detect-file-type">
@@ -140,5 +148,38 @@
     </div>
   </form>
 </div>
+
+<script>
+function previewImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('imagePreview').src = e.target.result;
+      document.getElementById('imagePreview').style.display = 'block';
+      document.getElementById('uploadIcon').style.display = 'none';
+      document.getElementById('uploadTitle').style.display = 'none';
+      document.getElementById('uploadSubtitle').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function showLoading() {
+  document.getElementById('analyzeBtn').style.display = 'none';
+  document.getElementById('loading').style.display = 'block';
+  setTimeout(function() {
+    document.querySelector('form').submit();
+  }, 2000); // 2 seconds
+  return false;
+}
+</script>
+
+<style>
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 
 {% endblock %}
